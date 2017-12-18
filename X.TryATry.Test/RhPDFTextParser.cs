@@ -45,7 +45,7 @@ namespace X.TryATry.Test
         string dicErrFile = @"config\dic_err.txt";
         string trimFile = @"config\regex_trim.txt";
         string deleteFile = @"config\regex_delete.txt";
-        string strPatern = "[ ]*";
+        string strPatern = @"[\s]*";
 
         /// <summary>
         /// 处理人行PDF文件内容
@@ -107,7 +107,7 @@ namespace X.TryATry.Test
         public string Match4DateString(string pdfParseText)
         {
             string text = pdfParseText;
-            //text = text.Replace("\r", "");
+            text = text.Replace("\r", "");
             //text = text.Replace("\n", " ");
 
             for (int i = 0; i < trimList.Count; i++)
@@ -216,7 +216,7 @@ namespace X.TryATry.Test
             Match mM = rM.Match(text);
             while (mM.Success)
             {
-                string tmpStr = mM.Value.Replace(" ", "");
+                string tmpStr = mM.Value.Replace(" ", "").Replace("\n", "");
                 text = text.Replace(mM.Value, tmpStr);
                 mM = mM.NextMatch();
             }

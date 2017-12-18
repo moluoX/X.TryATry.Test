@@ -13,7 +13,7 @@ namespace X.TryATry.Test
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            CreditAnalysis.Analysis(@"E:\doc\7-预授信\征信报告\详-李娟玉11.pdf");
+            CreditAnalysis.Analysis(@"E:\doc\7-预授信\征信报告\报告\李贞平.pdf");
             sw.Stop();
             Console.WriteLine(sw.ElapsedMilliseconds);
 

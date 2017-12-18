@@ -124,9 +124,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\CREDIT_DAIJIKA.cs" />
+    <Compile Include="Model\CREDIT_DAIJIKA_ALL.cs" />
     <Compile Include="Model\CREDIT_DAIJIKA_BACK.cs" />
     <Compile Include="Model\CREDIT_DAIJIKA_OVERDUE.cs" />
     <Compile Include="Model\CREDIT_DAIKUAN.cs" />
+    <Compile Include="Model\CREDIT_DAIKUAN_ALL.cs" />
     <Compile Include="Model\CREDIT_DAIKUAN_BACK.cs" />
     <Compile Include="Model\CREDIT_DAIKUAN_OVERDUE.cs" />
     <Compile Include="Model\CREDIT_DEBTSTATISTIC.cs" />

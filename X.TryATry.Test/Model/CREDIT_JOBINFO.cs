@@ -31,7 +31,7 @@ namespace X.TryATry.Test.Model
         private string _guid = null;
         private string _loanguid = null;
         private string _reportguid = null;
-        private Int32? _sn = Int32.MinValue;
+        private Int32? _sn;
         private string _companyname = null;
         private string _companyaddr = null;
         private string _jobname = null;
@@ -39,7 +39,7 @@ namespace X.TryATry.Test.Model
         private string _positionname = null;
         private string _protitle = null;
         private string _intoyear = null;
-        private DateTime? _updatedate = DateTime.MinValue;
+        private DateTime? _updatedate;
         #endregion
 
         #region 公共属性

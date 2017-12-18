@@ -33,6 +33,16 @@ namespace YCloud.MFBP.Utilities
             return 0;
         }
 
+        public static int? XToIntOrNull(this string s)
+        {
+            if (string.IsNullOrWhiteSpace(s))
+                return null;
+            int d;
+            if (int.TryParse(s, out d))
+                return d;
+            return null;
+        }
+
         public static decimal? XToDecimalOrNull(this string s)
         {
             if (string.IsNullOrWhiteSpace(s))

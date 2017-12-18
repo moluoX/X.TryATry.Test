@@ -34,22 +34,22 @@ namespace X.TryATry.Test.Model
         private string _businesscode = null;
         private string _organizename = null;
         private string _currency = null;
-        private DateTime _grantdate = DateTime.MinValue;
-        private decimal _grantmoney = decimal.MinValue;
+        private DateTime? _grantdate;
+        private decimal? _grantmoney;
         private string _assuretype = null;
         private string _accountstate = null;
-        private decimal _sharemoney = decimal.MinValue;
-        private decimal _usedmoney = decimal.MinValue;
-        private decimal _avgmoney = decimal.MinValue;
-        private decimal _maxmoney = decimal.MinValue;
-        private DateTime _billdate = DateTime.MinValue;
-        private decimal _backmoney = decimal.MinValue;
-        private decimal _factmoney = decimal.MinValue;
-        private DateTime _lastbackdate = DateTime.MinValue;
-        private decimal _overduetimes = decimal.MinValue;
-        private decimal _overduemoney = decimal.MinValue;
-        private Int32 _ordernum = Int32.MinValue;
-        private DateTime _createdate = DateTime.MinValue;
+        private decimal? _sharemoney;
+        private decimal? _usedmoney;
+        private decimal? _avgmoney;
+        private decimal? _maxmoney;
+        private DateTime? _billdate;
+        private decimal? _backmoney;
+        private decimal? _factmoney;
+        private DateTime? _lastbackdate;
+        private decimal? _overduetimes;
+        private decimal? _overduemoney;
+        private Int32? _ordernum;
+        private DateTime? _createdate;
         #endregion
 
         #region 公共属性
@@ -104,7 +104,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 发卡日期
         /// </summary>
-        public DateTime GRANTDATE
+        public DateTime? GRANTDATE
         {
             set { _grantdate = value; }
             get { return _grantdate; }
@@ -112,7 +112,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 授信额度
         /// </summary>
-        public decimal GRANTMONEY
+        public decimal? GRANTMONEY
         {
             set { _grantmoney = value; }
             get { return _grantmoney; }
@@ -136,7 +136,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 共享额度
         /// </summary>
-        public decimal SHAREMONEY
+        public decimal? SHAREMONEY
         {
             set { _sharemoney = value; }
             get { return _sharemoney; }
@@ -144,7 +144,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 已用额度
         /// </summary>
-        public decimal USEDMONEY
+        public decimal? USEDMONEY
         {
             set { _usedmoney = value; }
             get { return _usedmoney; }
@@ -152,7 +152,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 最近6个月平均使用额度
         /// </summary>
-        public decimal AVGMONEY
+        public decimal? AVGMONEY
         {
             set { _avgmoney = value; }
             get { return _avgmoney; }
@@ -160,7 +160,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 最大使用额度
         /// </summary>
-        public decimal MAXMONEY
+        public decimal? MAXMONEY
         {
             set { _maxmoney = value; }
             get { return _maxmoney; }
@@ -168,7 +168,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 账单日
         /// </summary>
-        public DateTime BILLDATE
+        public DateTime? BILLDATE
         {
             set { _billdate = value; }
             get { return _billdate; }
@@ -176,7 +176,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 本月应还款
         /// </summary>
-        public decimal BACKMONEY
+        public decimal? BACKMONEY
         {
             set { _backmoney = value; }
             get { return _backmoney; }
@@ -184,7 +184,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 本月实还款
         /// </summary>
-        public decimal FACTMONEY
+        public decimal? FACTMONEY
         {
             set { _factmoney = value; }
             get { return _factmoney; }
@@ -192,7 +192,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 最近一次还款日期
         /// </summary>
-        public DateTime LASTBACKDATE
+        public DateTime? LASTBACKDATE
         {
             set { _lastbackdate = value; }
             get { return _lastbackdate; }
@@ -200,7 +200,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 当前逾期期数
         /// </summary>
-        public decimal OVERDUETIMES
+        public decimal? OVERDUETIMES
         {
             set { _overduetimes = value; }
             get { return _overduetimes; }
@@ -208,7 +208,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 当前逾期金额
         /// </summary>
-        public decimal OVERDUEMONEY
+        public decimal? OVERDUEMONEY
         {
             set { _overduemoney = value; }
             get { return _overduemoney; }
@@ -216,7 +216,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 排序序号
         /// </summary>
-        public Int32 ORDERNUM
+        public Int32? ORDERNUM
         {
             set { _ordernum = value; }
             get { return _ordernum; }
@@ -224,7 +224,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 创建日期
         /// </summary>
-        public DateTime CREATEDATE
+        public DateTime? CREATEDATE
         {
             set { _createdate = value; }
             get { return _createdate; }

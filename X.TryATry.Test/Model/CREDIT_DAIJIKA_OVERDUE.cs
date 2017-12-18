@@ -31,9 +31,9 @@ namespace X.TryATry.Test.Model
         private string _overdueguid = null;
         private string _daijikaguid = null;
         private string _overduemonth = null;
-        private Int32 _overdueterms = Int32.MinValue;
-        private decimal _overduemoney = decimal.MinValue;
-        private DateTime _createdate = DateTime.MinValue;
+        private Int32? _overdueterms;
+        private decimal? _overduemoney;
+        private DateTime? _createdate;
         #endregion
 
         #region 公共属性
@@ -64,7 +64,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 逾期持续月数
         /// </summary>
-        public Int32 OVERDUETERMS
+        public Int32? OVERDUETERMS
         {
             set{ _overdueterms=value;}
             get{return _overdueterms;}
@@ -72,7 +72,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 逾期金额
         /// </summary>
-        public decimal OVERDUEMONEY
+        public decimal? OVERDUEMONEY
         {
             set{ _overduemoney=value;}
             get{return _overduemoney;}
@@ -80,7 +80,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime CREATEDATE
+        public DateTime? CREATEDATE
         {
             set{ _createdate=value;}
             get{return _createdate;}

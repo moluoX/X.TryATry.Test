@@ -39,26 +39,26 @@ namespace X.TryATry.Test.Model
         private string _accountstate = null;
         private string _backcycle = null;
         private string _backterms = null;
-        private DateTime _begindate = DateTime.MinValue;
-        private DateTime _enddate = DateTime.MinValue;
-        private decimal _contractmoney = decimal.MinValue;
-        private DateTime _endday = DateTime.MinValue;
+        private DateTime? _begindate;
+        private DateTime? _enddate;
+        private decimal? _contractmoney;
+        private DateTime? _endday;
         private string _endmonth = null;
         private string _fivelevel = null;
-        private decimal _balancemoney = decimal.MinValue;
-        private Int32 _remainterms = Int32.MinValue;
-        private decimal _currentmoney = decimal.MinValue;
+        private decimal? _balancemoney;
+        private Int32? _remainterms;
+        private decimal? _currentmoney;
         private string _backday = null;
-        private decimal _factmoney = decimal.MinValue;
+        private decimal? _factmoney;
         private string _lastbackdate = null;
-        private Int32 _overdueterms = Int32.MinValue;
-        private decimal _overduemoney = decimal.MinValue;
-        private decimal _overdue31 = decimal.MinValue;
-        private decimal _overdue61 = decimal.MinValue;
-        private decimal _overdue91 = decimal.MinValue;
-        private decimal _overdue181 = decimal.MinValue;
-        private Int32 _ordernum = Int32.MinValue;
-        private DateTime _createdate = DateTime.MinValue;
+        private Int32? _overdueterms;
+        private decimal? _overduemoney;
+        private decimal? _overdue31;
+        private decimal? _overdue61;
+        private decimal? _overdue91;
+        private decimal? _overdue181;
+        private Int32? _ordernum;
+        private DateTime? _createdate;
         #endregion
 
         #region 公共属性
@@ -153,7 +153,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 贷款发放日
         /// </summary>
-        public DateTime BEGINDATE
+        public DateTime? BEGINDATE
         {
             set{ _begindate=value;}
             get{return _begindate;}
@@ -161,7 +161,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 贷款到期日
         /// </summary>
-        public DateTime ENDDATE
+        public DateTime? ENDDATE
         {
             set{ _enddate=value;}
             get{return _enddate;}
@@ -169,7 +169,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 贷款合同金额
         /// </summary>
-        public decimal CONTRACTMONEY
+        public decimal? CONTRACTMONEY
         {
             set{ _contractmoney=value;}
             get{return _contractmoney;}
@@ -177,7 +177,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 状态截止日
         /// </summary>
-        public DateTime ENDDAY
+        public DateTime? ENDDAY
         {
             set{ _endday=value;}
             get{return _endday;}
@@ -201,7 +201,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 本金余额
         /// </summary>
-        public decimal BALANCEMONEY
+        public decimal? BALANCEMONEY
         {
             set{ _balancemoney=value;}
             get{return _balancemoney;}
@@ -209,7 +209,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 剩余还款期数
         /// </summary>
-        public Int32 REMAINTERMS
+        public Int32? REMAINTERMS
         {
             set{ _remainterms=value;}
             get{return _remainterms;}
@@ -217,7 +217,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 本月应还款
         /// </summary>
-        public decimal CURRENTMONEY
+        public decimal? CURRENTMONEY
         {
             set{ _currentmoney=value;}
             get{return _currentmoney;}
@@ -233,7 +233,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 本月实还款
         /// </summary>
-        public decimal FACTMONEY
+        public decimal? FACTMONEY
         {
             set{ _factmoney=value;}
             get{return _factmoney;}
@@ -249,7 +249,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 当前逾期期数
         /// </summary>
-        public Int32 OVERDUETERMS
+        public Int32? OVERDUETERMS
         {
             set{ _overdueterms=value;}
             get{return _overdueterms;}
@@ -257,7 +257,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 当前逾期金额
         /// </summary>
-        public decimal OVERDUEMONEY
+        public decimal? OVERDUEMONEY
         {
             set{ _overduemoney=value;}
             get{return _overduemoney;}
@@ -265,7 +265,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 逾期31~60天未还本金
         /// </summary>
-        public decimal OVERDUE31
+        public decimal? OVERDUE31
         {
             set{ _overdue31=value;}
             get{return _overdue31;}
@@ -273,7 +273,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 逾期61~90天未还本金
         /// </summary>
-        public decimal OVERDUE61
+        public decimal? OVERDUE61
         {
             set{ _overdue61=value;}
             get{return _overdue61;}
@@ -281,7 +281,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 逾期91~180天未还本金
         /// </summary>
-        public decimal OVERDUE91
+        public decimal? OVERDUE91
         {
             set{ _overdue91=value;}
             get{return _overdue91;}
@@ -289,7 +289,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 逾期180天以上未还本金
         /// </summary>
-        public decimal OVERDUE181
+        public decimal? OVERDUE181
         {
             set{ _overdue181=value;}
             get{return _overdue181;}
@@ -297,7 +297,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 排序序号
         /// </summary>
-        public Int32 ORDERNUM
+        public Int32? ORDERNUM
         {
             set{ _ordernum=value;}
             get{return _ordernum;}
@@ -305,7 +305,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime CREATEDATE
+        public DateTime? CREATEDATE
         {
             set{ _createdate=value;}
             get{return _createdate;}

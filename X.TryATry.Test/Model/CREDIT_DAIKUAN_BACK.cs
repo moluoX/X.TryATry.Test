@@ -55,7 +55,7 @@ namespace X.TryATry.Test.Model
         private string _month22 = null;
         private string _month23 = null;
         private string _month24 = null;
-        private DateTime _createdate = DateTime.MinValue;
+        private DateTime? _createdate;
         #endregion
 
         #region 公共属性
@@ -278,7 +278,7 @@ namespace X.TryATry.Test.Model
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime CREATEDATE
+        public DateTime? CREATEDATE
         {
             set{ _createdate=value;}
             get{return _createdate;}
