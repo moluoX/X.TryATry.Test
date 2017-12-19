@@ -26,37 +26,14 @@ namespace X.TryATry.Test
             text = Pretreatment(text);
 
             //定位，截取
-            int headStart = -1, headEnd = -1;
-            int head2Start = -1, head2End = -1;
-            int personalStart = -1, personalEnd = -1;
-            int personal2Start = -1, personal2End = -1;
-
-            regex = new Regex(@"\n+\s*报告编号");
+            int headStart, headEnd;
+            regex = new Regex(@"报告编号");
             match = regex.Match(text);
             headStart = match.Index;
 
-            regex = new Regex(@"\n+\s*被查询者姓名.*\n+");
+            regex = new Regex(@"配偶信息");
             match = regex.Match(text);
             headEnd = match.Index;
-            head2Start = match.Index + match.Length;
-
-            regex = new Regex(@"\n+.*个人基本信息.*\n+");
-            match = regex.Match(text);
-            head2End = match.Index;
-
-            regex = new Regex(@"\n+\s*性别.*\n+");
-            match = regex.Match(text);
-            personalStart = match.Index + match.Length;
-
-            regex = new Regex(@"\n+\s*单位电话.*\n+");
-            match = regex.Match(text);
-            personal2Start = match.Index + match.Length;
-
-            regex = new Regex(@"\n+\s*数据发生机构名称.*\n+");
-            match = regex.Match(text);
-            personalEnd = match.Index;
-            match = match.NextMatch();
-            personal2End = match.Index;
 
             int livingStart, livingEnd;
             regex = new Regex(@"\n+\s*居住信息\s*\n+");
@@ -103,72 +80,149 @@ namespace X.TryATry.Test
             match = regex.Match(text);
             daijikaEnd = match.Index;
 
-            //AnalysisPersonal(text.Substring(headStart, headEnd - headStart));
+            int recordStart, recordEnd;
+            regex = new Regex(@".*机构查询记录明细.*");
+            match = regex.Match(text);
+            recordStart = match.Index + match.Length;
+
+            regex = new Regex(@".*报告说明.*");
+            match = regex.Match(text);
+            recordEnd = match.Index;
+
+            var personal = AnalysisPersonal(text.Substring(headStart, headEnd - headStart));
             var living = AnalysisLiving(text.Substring(livingStart, livingEnd - livingStart));
             var job = AnalysisJob(text.Substring(jobStart, jobEnd - jobStart));
             var debt = AnalysisDebtStatistic(text.Substring(debtStatisticStart, debtStatisticEnd - debtStatisticStart));
             var daikuans = AnalysisDaikuan(text.Substring(daikuanStart, daikuanEnd - daikuanStart));
             var daijikas = AnalysisDaijika(text.Substring(daijikaStart, daijikaEnd - daijikaStart));
+            var records = AnalysisRecordDetails(text.Substring(recordStart, recordEnd - recordStart));
         }
 
-        private static void AnalysisPersonal(string text)
+        private static CREDIT_PERSONALINFO AnalysisPersonal(string textAll)
         {
+            var m = new CREDIT_PERSONALINFO();
+            var regex = new Regex(@"(?<=报告时间\s*[：:]\s*)\d{4}\.\d{2}\.\d{2}\s\d{2}:\d{2}:\d{2}");
+            var match = regex.Match(textAll);
+            if (match.Success)
             {
-                var regex = new Regex(@"姓名:*\s*[\u4E00-\u9FA5]+\s");
-                var match = regex.Match(text);
+                m.REPORTDATE = match.Value.XToDateTimeOrNull() ?? DateTime.Now;
+            }
+
+            #region 姓名行
+            int start1, end1;
+            regex = new Regex(@".*被查询者证件号码.*");
+            match = regex.Match(textAll);
+            start1 = match.Index + match.Length;
+
+            regex = new Regex(@".*个人基本信息.*");
+            match = regex.Match(textAll, start1);
+            end1 = match.Index;
+
+            if (start1 >= 0 && end1 > 0)
+            {
+                var text = textAll.Substring(start1, end1 - start1).Replace("\n", " ").Trim();
+                //被查询者姓名
+                m.CUSTNAME = GetUntilSpaceFromRow(ref text, PositionInRow.Start);
+                //身份证号
+                regex = new Regex(@"\d{17}[\d|x]|\d{15}");
+                match = regex.Match(text);
                 if (match.Success)
                 {
-                    var value = match.Value.Replace("姓名", "").Replace(":", "").Trim();
+                    m.IDCARD = match.Value;
+                    text = text.Substring(match.Index + match.Length);
                 }
+                //查询原因
+                m.CHECKCAUSE = GetUntilSpaceFromRow(ref text, PositionInRow.End);
             }
+            #endregion
+
+            #region 性别行
+            int start2, end2;
+            regex = new Regex(@".*手机号码.*");
+            match = regex.Match(textAll, end1);
+            start2 = match.Index + match.Length;
+
+            regex = new Regex(@".*数据发生.*");
+            match = regex.Match(textAll, start2);
+            end2 = match.Index;
+
+            if (start2 > 0 && end2 > 0)
             {
-                var regex = new Regex(@"证件类型:*\s*[\u4E00-\u9FA5]+\s");
-                var match = regex.Match(text);
+                var text = textAll.Substring(start2, end2 - start2).Replace("\n", " ").Trim();
+                //性别
+                regex = new Regex(@"男性|女性");
+                match = regex.Match(text);
                 if (match.Success)
                 {
-                    var value = match.Value.Replace("证件类型", "").Replace(":", "").Trim();
+                    m.GENDER = match.Value;
+                    text = text.Substring(match.Index + match.Length);
                 }
-            }
-            {
-                var regex = new Regex(@"证件号码:*\s*\*+[0-9X]+\s");
-                var match = regex.Match(text);
+                //出生日期
+                regex = new Regex(@"\d{4}\.\d{2}\.\d{2}");
+                match = regex.Match(text);
                 if (match.Success)
                 {
-                    var value = match.Value.Replace("证件号码", "").Replace(":", "").Replace("*", "").Trim();
+                    m.BIRTHDAY = match.Value.XToDateTimeOrNull();
+                    text = text.Substring(match.Index + match.Length);
                 }
-            }
-            {
-                var regex = new Regex(@"已婚|未婚|离异|再婚|丧偶");
-                var match = regex.Match(text);
+                //手机号码
+                regex = new Regex(@"0?(13|14|15|17|18|19)[0-9]{9}");
+                match = regex.Match(text);
                 if (match.Success)
                 {
-                    var value = match.Value;
+                    m.CELLPHONE = match.Value;
+                    text = regex.Replace(text, "");
                 }
+                //婚姻状况
+                m.MARRYSTATUS = text.Trim();
             }
+            #endregion
+
+            #region 单位电话行
+            int start3, end3;
+            regex = new Regex(@".*学位.*");
+            match = regex.Match(textAll, end2);
+            start3 = match.Index + match.Length;
+
+            regex = new Regex(@".*数据发生.*");
+            match = regex.Match(textAll, start3);
+            end3 = match.Index;
+
+            if (start3 > 0 && end3 > 0)
             {
-                var regex = new Regex(@"报告编号:*\s*\d+");
-                var match = regex.Match(text);
-                if (match.Success)
-                {
-                    var value = match.Value.Replace("报告编号", "").Replace(":", "").Trim();
-                }
+                var text = textAll.Substring(start3, end3 - start3).Replace("\n", " ").Trim();
+                //单位电话
+                m.COMPANYTEL = GetUntilSpaceFromRow(ref text, PositionInRow.Start);
+                //住宅电话
+                m.HOMETEL = GetUntilSpaceFromRow(ref text, PositionInRow.Start);
+                //学位
+                m.DEGREE = GetUntilSpaceFromRow(ref text, PositionInRow.End);
+                //学历
+                m.EDUCATION = text.Trim();
             }
+            #endregion
+
+            #region 通讯地址行
+            int start4, end4;
+            regex = new Regex(@".*户痛奢地址.*");
+            match = regex.Match(textAll, end3);
+            start4 = match.Index + match.Length;
+
+            regex = new Regex(@".*数据发生.*");
+            match = regex.Match(textAll, start4);
+            end4 = match.Index;
+
+            if (start4 > 0 && end4 > 0)
             {
-                var regex = new Regex(@"查询时间:*\s*[0-9\.:\-\s]+");
-                var match = regex.Match(text);
-                if (match.Success)
-                {
-                    var value = match.Value.Replace("查询时间", "").Replace(":", "").Trim();
-                }
+                var text = textAll.Substring(start4, end4 - start4).Replace("\n", " ").Trim();
+                //通讯地址
+                m.POSTALADDR = GetUntilSpaceFromRow(ref text, PositionInRow.Start);
+                //户籍地址
+                m.HOUSEHOLDADDR = text.Trim();
             }
-            {
-                var regex = new Regex(@"报告时间:*\s*[0-9\.:\-\s]+");
-                var match = regex.Match(text);
-                if (match.Success)
-                {
-                    var value = match.Value.Replace("报告时间", "").Replace(":", "").Trim();
-                }
-            }
+            #endregion
+
+            return m;
         }
 
         private static IList<CREDIT_LIVINGINFO> AnalysisLiving(string textAll)
@@ -847,6 +901,81 @@ namespace X.TryATry.Test
                 }
                 #endregion
             }
+            return list;
+        }
+
+        private static IList<CREDIT_RECORD_DETAILS> AnalysisRecordDetails(string textAll)
+        {
+            var list = new List<CREDIT_RECORD_DETAILS>();
+            int start1, end1;
+            int start2, end2;
+            int count1;
+
+            #region 机构查询记录明细
+            start1 = 0;
+
+            var regex = new Regex(@"本人查询记录明细");
+            var match = regex.Match(textAll);
+            end1 = start2 = match.Index;
+
+            var text1 = "\n" + textAll.Substring(start1, end1 - start1);
+
+            //分割每行，取每行数据
+            var rows1 = SplitRowSerial(text1);
+            count1 = rows1.Count;
+            for (int i = 0; i < rows1.Count; i++)
+            {
+                var row = rows1[i];
+                var m = new CREDIT_RECORD_DETAILS();
+                list.Add(m);
+
+                //编号
+                m.SN = i + 1;
+                //查询日期
+                regex = new Regex(@"\d{4}\.\d{2}\.\d{2}");
+                match = regex.Match(row);
+                if (match.Success)
+                {
+                    m.QUERYDATE = match.Value.XToDateTimeOrNull();
+                    row = regex.Replace(row, "").Trim();
+                }
+                //查询原因
+                m.REMARK = GetUntilSpaceFromRow(ref row, PositionInRow.End);
+                //查询操作员
+                m.OPERATOR = row.Replace(" ", "");
+            }
+            #endregion
+
+            #region 本人查询记录明细
+            end2 = textAll.Length;
+
+            var text2 = "\n" + textAll.Substring(start2, end2 - start2);
+
+            //分割每行，取每行数据
+            var rows2 = SplitRowSerial(text2);
+            for (int i = 0; i < rows2.Count; i++)
+            {
+                var row = rows2[i];
+                var m = new CREDIT_RECORD_DETAILS();
+                list.Add(m);
+
+                //编号
+                m.SN = count1 + i + 1;
+                //查询日期
+                regex = new Regex(@"\d{4}\.\d{2}\.\d{2}");
+                match = regex.Match(row);
+                if (match.Success)
+                {
+                    m.QUERYDATE = match.Value.XToDateTimeOrNull();
+                    row = regex.Replace(row, "").Trim();
+                }
+                //查询原因
+                m.REMARK = GetUntilSpaceFromRow(ref row, PositionInRow.End);
+                //查询操作员
+                m.OPERATOR = row.Replace(" ", "");
+            }
+            #endregion
+
             return list;
         }
 

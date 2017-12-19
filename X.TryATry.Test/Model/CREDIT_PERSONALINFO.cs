@@ -13,18 +13,18 @@ using System.ComponentModel;
 
 namespace X.TryATry.Test.Model
 {
-	/// <summary>
-	/// 实体 征信报告个人基本信息记录表
-	/// </summary>
-	[Description("Primary:GUID")]
+    /// <summary>
+    /// 实体 征信报告个人基本信息记录表
+    /// </summary>
+    [Description("Primary:GUID")]
     [Serializable]
-	public class CREDIT_PERSONALINFO
-	{
+    public class CREDIT_PERSONALINFO
+    {
         #region 构造函数
         /// <summary>
         /// 实体 征信报告个人基本信息记录表
         /// </summary>
-        public CREDIT_PERSONALINFO(){}
+        public CREDIT_PERSONALINFO() { }
         #endregion
 
         #region 私有变量
@@ -35,7 +35,7 @@ namespace X.TryATry.Test.Model
         private string _idcard = null;
         private string _checkcause = null;
         private string _gender = null;
-        private DateTime _birthday = DateTime.MinValue;
+        private DateTime? _birthday;
         private string _marrystatus = null;
         private string _cellphone = null;
         private string _companytel = null;
@@ -44,7 +44,7 @@ namespace X.TryATry.Test.Model
         private string _degree = null;
         private string _postaladdr = null;
         private string _householdaddr = null;
-        private DateTime _reportdate = DateTime.MinValue;
+        private DateTime? _reportdate;
         private string _isintocheck = null;
         #endregion
 
@@ -54,145 +54,145 @@ namespace X.TryATry.Test.Model
         /// </summary>
         public string GUID
         {
-            set{ _guid=value;}
-            get{return _guid;}
+            set { _guid = value; }
+            get { return _guid; }
         }
         /// <summary>
         /// 对应贷款GUID
         /// </summary>
         public string LOANGUID
         {
-            set{ _loanguid=value;}
-            get{return _loanguid;}
+            set { _loanguid = value; }
+            get { return _loanguid; }
         }
         /// <summary>
         /// 对应征信报告GUID
         /// </summary>
         public string REPORTGUID
         {
-            set{ _reportguid=value;}
-            get{return _reportguid;}
+            set { _reportguid = value; }
+            get { return _reportguid; }
         }
         /// <summary>
         /// 被查询者姓名
         /// </summary>
         public string CUSTNAME
         {
-            set{ _custname=value;}
-            get{return _custname;}
+            set { _custname = value; }
+            get { return _custname; }
         }
         /// <summary>
         /// 身份证号
         /// </summary>
         public string IDCARD
         {
-            set{ _idcard=value;}
-            get{return _idcard;}
+            set { _idcard = value; }
+            get { return _idcard; }
         }
         /// <summary>
         /// 查询原因
         /// </summary>
         public string CHECKCAUSE
         {
-            set{ _checkcause=value;}
-            get{return _checkcause;}
+            set { _checkcause = value; }
+            get { return _checkcause; }
         }
         /// <summary>
         /// 性别
         /// </summary>
         public string GENDER
         {
-            set{ _gender=value;}
-            get{return _gender;}
+            set { _gender = value; }
+            get { return _gender; }
         }
         /// <summary>
         /// 出生日期
         /// </summary>
-        public DateTime BIRTHDAY
+        public DateTime? BIRTHDAY
         {
-            set{ _birthday=value;}
-            get{return _birthday;}
+            set { _birthday = value; }
+            get { return _birthday; }
         }
         /// <summary>
         /// 婚姻状况
         /// </summary>
         public string MARRYSTATUS
         {
-            set{ _marrystatus=value;}
-            get{return _marrystatus;}
+            set { _marrystatus = value; }
+            get { return _marrystatus; }
         }
         /// <summary>
         /// 手机号
         /// </summary>
         public string CELLPHONE
         {
-            set{ _cellphone=value;}
-            get{return _cellphone;}
+            set { _cellphone = value; }
+            get { return _cellphone; }
         }
         /// <summary>
         /// 公司电话
         /// </summary>
         public string COMPANYTEL
         {
-            set{ _companytel=value;}
-            get{return _companytel;}
+            set { _companytel = value; }
+            get { return _companytel; }
         }
         /// <summary>
         /// 住宅电话
         /// </summary>
         public string HOMETEL
         {
-            set{ _hometel=value;}
-            get{return _hometel;}
+            set { _hometel = value; }
+            get { return _hometel; }
         }
         /// <summary>
         /// 学历
         /// </summary>
         public string EDUCATION
         {
-            set{ _education=value;}
-            get{return _education;}
+            set { _education = value; }
+            get { return _education; }
         }
         /// <summary>
         /// 学位
         /// </summary>
         public string DEGREE
         {
-            set{ _degree=value;}
-            get{return _degree;}
+            set { _degree = value; }
+            get { return _degree; }
         }
         /// <summary>
         /// 通讯地址
         /// </summary>
         public string POSTALADDR
         {
-            set{ _postaladdr=value;}
-            get{return _postaladdr;}
+            set { _postaladdr = value; }
+            get { return _postaladdr; }
         }
         /// <summary>
         /// 户籍地址
         /// </summary>
         public string HOUSEHOLDADDR
         {
-            set{ _householdaddr=value;}
-            get{return _householdaddr;}
+            set { _householdaddr = value; }
+            get { return _householdaddr; }
         }
         /// <summary>
         /// 报告日期
         /// </summary>
-        public DateTime REPORTDATE
+        public DateTime? REPORTDATE
         {
-            set{ _reportdate=value;}
-            get{return _reportdate;}
+            set { _reportdate = value; }
+            get { return _reportdate; }
         }
         /// <summary>
         /// 是否已更新到核查表
         /// </summary>
         public string ISINTOCHECK
         {
-            set{ _isintocheck=value;}
-            get{return _isintocheck;}
+            set { _isintocheck = value; }
+            get { return _isintocheck; }
         }
         #endregion
-	}
+    }
 }
