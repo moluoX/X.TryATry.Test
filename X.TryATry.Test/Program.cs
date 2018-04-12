@@ -11,18 +11,9 @@ namespace X.TryATry.Test
     {
         static void Main(string[] args)
         {
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            CreditAnalysis.Analysis(@"E:\doc\7-预授信\征信报告\报告\李贞平.pdf");
-            sw.Stop();
-            Console.WriteLine(sw.ElapsedMilliseconds);
+            log4net.Config.XmlConfigurator.Configure();
 
-            sw.Restart();
-            //ElementReaderAdv.Do(@"E:\doc\7-预授信\征信报告\详-李娟玉11.pdf");
-            sw.Stop();
-            Console.WriteLine(sw.ElapsedMilliseconds);
-
-            //PdfAnalysis.AnalysisCreditSimple(@"E:\doc\7-预授信\征信报告\详版征信old-郑立德-431126198411287058-008.pdf");
+            new ThrowTester().Do3();
 
             Console.ReadLine();
         }
